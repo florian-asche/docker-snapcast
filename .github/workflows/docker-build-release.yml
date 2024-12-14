@@ -26,8 +26,8 @@ jobs:
           GIT_TAG: ${{ github.ref_name }}
         run: |
           UPSTREAM_TAG="${GIT_TAG%-*}"
-          SNAPCAST_VERSION1="${GIT_TAG#v}"
-          SNAPCAST_VERSION2="${UPSTREAM_TAG#v}"
+          SNAPCAST_VERSION1="${UPSTREAM_TAG#v}"
+          SNAPCAST_VERSION2="${GIT_TAG#v}"
           for VAR in GIT_TAG SNAPCAST_VERSION1 SNAPCAST_VERSION2; do
             echo "${VAR}=${!VAR}" >> $GITHUB_OUTPUT
           done
