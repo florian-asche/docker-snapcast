@@ -27,7 +27,7 @@ jobs:
         run: |
           UPSTREAM_TAG="${GIT_TAG%-*}"
           UPSTREAM_VERSION="${UPSTREAM_TAG#v}"
-          for VAR in UPSTREAM_TAG UPSTREAM_VERSION; do
+          for VAR in GIT_TAG UPSTREAM_TAG UPSTREAM_VERSION; do
             echo "${VAR}=${!VAR}" >> $GITHUB_OUTPUT
           done
       - name: Checkout repository
@@ -63,7 +63,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             DEBIAN_VERSION=bookworm
-            SNAPCAST_VERSION=${{ steps.compute_args.outputs.UPSTREAM_VERSION }}
+            SNAPCAST_VERSION=${{ steps.compute_args.outputs.GIT_TAG }}
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
         with:
