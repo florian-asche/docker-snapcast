@@ -1,5 +1,5 @@
 ---
-name: Build and publish the voice sattelite stable docker image
+name: Build and publish the snapcast docker image
 
 on:
   push:
