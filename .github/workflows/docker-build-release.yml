@@ -63,7 +63,8 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             DEBIAN_VERSION=bookworm
-            SNAPCAST_VERSION=${{ steps.compute_args.outputs.GIT_TAG }}
+            SNAPCAST_VERSION1=${{ steps.compute_args.outputs.UPSTREAM_VERSION }}
+            SNAPCAST_VERSION2=${{ steps.compute_args.outputs.GIT_TAG }}
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
         with:

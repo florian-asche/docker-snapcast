@@ -1,12 +1,14 @@
 ARG DEBIAN_VERSION=bookworm
-ARG SNAPCAST_VERSION=0.29.0-1
+ARG SNAPCAST_VERSION1=0.29.0
+ARG SNAPCAST_VERSION2=0.29.0-1
 
 FROM debian:${DEBIAN_VERSION}
 ARG DEBIAN_VERSION
-ARG SNAPCAST_VERSION
+ARG SNAPCAST_VERSION1
+ARG SNAPCAST_VERSION2
 RUN apt-get update && apt-get install -y curl
-RUN curl -vfL -o /tmp/snapserver.deb https://github.com/badaix/snapcast/releases/download/v${SNAPCAST_VERSION}/snapserver_${SNAPCAST_VERSION}_$(dpkg --print-architecture)_${DEBIAN_VERSION}.deb && \
-    curl -vfL -o /tmp/snapclient.deb https://github.com/badaix/snapcast/releases/download/v${SNAPCAST_VERSION}/snapclient_${SNAPCAST_VERSION}_$(dpkg --print-architecture)_${DEBIAN_VERSION}.deb && \
+RUN curl -vfL -o /tmp/snapserver.deb https://github.com/badaix/snapcast/releases/download/v${SNAPCAST_VERSION1}/snapserver_${SNAPCAST_VERSION2}_$(dpkg --print-architecture)_${DEBIAN_VERSION}.deb && \
+    curl -vfL -o /tmp/snapclient.deb https://github.com/badaix/snapcast/releases/download/v${SNAPCAST_VERSION1}/snapclient_${SNAPCAST_VERSION2}_$(dpkg --print-architecture)_${DEBIAN_VERSION}.deb && \
     apt install -y /tmp/snapserver.deb /tmp/snapclient.deb
 RUN rm -rf /var/lib/apt/lists/*
 
