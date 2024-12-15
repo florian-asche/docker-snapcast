@@ -1,0 +1,29 @@
+---
+# This compose file is for the central server but you can also or better use the music-assistant from nabucasa
+networks:
+  default:                # default network for this project
+
+
+services:
+  snapcast:
+    # snapcast server for audio playback
+    container_name: snapcast
+    image: "ghcr.io/florian-asche/docker-snapcast:0.29.0-1"
+    restart: unless-stopped
+    network_mode: "host"
+    environment:
+      - START_SNAPSERVER=true
+      - SNAPSERVER_OPTS=""
+    group_add:
+      - audio
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - snapcast_config:/conf/
+    command:
+      - "--config"
+      - "/conf/snapserver.conf"
+
+
+volumes:
+  snapcast_config:

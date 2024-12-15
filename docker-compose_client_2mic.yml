@@ -1,0 +1,33 @@
+---
+# This compose file is for the ReSpeaker 2-Mics HAT
+networks:
+  default:                # default network for this project
+
+
+services:
+  snapcast:
+    # snapcast client for audio playback
+    container_name: snapcast
+    image: "ghcr.io/florian-asche/docker-snapcast:0.29.0-1"
+    restart: unless-stopped
+    network_mode: "host"
+    entrypoint: /usr/bin/snapclient
+    environment:
+      - START_SNAPCLIENT=true
+    command:
+      - "--host"
+      - "192.168.33.5"
+      - "--hostID"
+      - "wohnzimmer"
+      - "--soundcard"
+      - "plughw:seeed2micvoicec,0"
+      #     - "aplay -D plughw:CARD=seeed2micvoicec,DEV=0 -r 22050 -c 1 -f S16_LE -t raw"
+    devices:
+      - /dev/snd:/dev/snd
+      - /dev/bus/usb
+    group_add:
+      - audio
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+
