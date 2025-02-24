@@ -27,7 +27,7 @@ jobs:
         run: echo "SNAPCAST_FULL_VERSION=$(cat version.txt)" >> $GITHUB_ENV
 
       - name: Use version
-        run: echo "The version is $VERSION"
+        run: echo "The version is $SNAPCAST_FULL_VERSION"
 
       - name: Compute build arguments
         id: compute_args
