@@ -15,12 +15,13 @@ services:
     environment:
       - START_SNAPCLIENT=true
     command:
+      #- "--list" # List devices
       - "--host"
-      - "192.168.33.5"
+      - "192.168.33.5" # Put your Snapcast or MusicAssistant Server IP here
       - "--hostID"
-      - "wohnzimmer"
+      - "wohnzimmer"   # Put your device name here
       - "--soundcard"
-      - "plughw:seeed2micvoicec,0"
+      - "hw:CARD=seeed2micvoicec,DEV=0"
       #     - "aplay -D plughw:CARD=seeed2micvoicec,DEV=0 -r 22050 -c 1 -f S16_LE -t raw"
     devices:
       - /dev/snd:/dev/snd
@@ -30,4 +31,3 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-

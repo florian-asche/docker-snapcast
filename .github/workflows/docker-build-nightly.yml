@@ -1,5 +1,5 @@
 ---
-name: Build and publish the voice sattelite docker image
+name: Build and publish the nightly snapcast docker image
 
 on:
   push:
@@ -19,19 +19,26 @@ jobs:
       attestations: write
 
     steps:
-      - name: Compute build arguments
-        id: compute_args
-        env:
-          GIT_TAG: ${{ github.ref_name }}
-        run: |
-          UPSTREAM_TAG="${GIT_TAG%-*}"
-          SNAPCAST_VERSION1="${UPSTREAM_TAG#v}"
-          SNAPCAST_VERSION2="${GIT_TAG#v}"
-          for VAR in GIT_TAG SNAPCAST_VERSION1 SNAPCAST_VERSION2; do
-            echo "${VAR}=${!VAR}" >> $GITHUB_OUTPUT
-          done
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Read version from file
+        id: version
+        run: echo "SNAPCAST_FULL_VERSION=$(cat version.txt)" >> $GITHUB_ENV
+
+      - name: Use version
+        run: echo "The version is $VERSION"
+
+      - name: Compute build arguments
+        id: compute_args
+        run: |
+          UPSTREAM_TAG="${SNAPCAST_FULL_VERSION%-*}"
+          SNAPCAST_VERSION1="${UPSTREAM_TAG#v}"
+          SNAPCAST_VERSION2="${SNAPCAST_FULL_VERSION#v}"
+          for VAR in SNAPCAST_FULL_VERSION SNAPCAST_VERSION1 SNAPCAST_VERSION2; do
+            echo "${VAR}=${!VAR}" >> $GITHUB_OUTPUT
+          done
+
       - name: Log in to the Container registry
         uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20 # v3.1.0
         with:
