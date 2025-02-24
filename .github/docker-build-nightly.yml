@@ -4,7 +4,7 @@ name: Build and publish the voice sattelite docker image
 on:
   push:
     branches:
-      - "master"
+      - "main"
 
 env:
   REGISTRY: ghcr.io
