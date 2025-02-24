@@ -11,3 +11,5 @@ docker run --rm -it --entrypoint=/usr/bin/snapclient ghcr.io/florian-asche/snapc
 ```
 
 Image builds can be tracked in this repository's `Actions` tab, and utilize [artifact attestation](https://docs.github.com/en/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds) to certify provenance.
+
+The image uses pipewire for the connect to the audio server.
