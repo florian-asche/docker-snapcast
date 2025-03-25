@@ -24,7 +24,7 @@ If you're using [Home Assistant](https://www.home-assistant.io/) from [Nabu Casa
 To run the Snapcast server:
 
 ```bash
-docker run --rm -it ghcr.io/florian-asche/docker-snapcast:0.31.0-1
+docker run --rm -it ghcr.io/florian-asche/docker-snapcast:latest
 ```
 
 ### Snapcast Client
@@ -44,7 +44,7 @@ docker run --rm -it \
   -e XDG_RUNTIME_DIR=/run \
   --volume /run/user/1000/pipewire-0:/run/pipewire-0 \
   --entrypoint=/usr/bin/snapclient \
-  ghcr.io/florian-asche/docker-snapcast:0.31.0-1 \
+  ghcr.io/florian-asche/docker-snapcast:latest \
   --host 192.168.33.5 \
   --hostID client1 \
   --soundcard pipewire
@@ -80,7 +80,7 @@ The Docker images are built using GitHub Actions, which provides:
 
 - `latest`: Latest stable release
 - `nightly`: Builds from the main branch (may be unstable)
-- Version-specific tags (e.g., `0.31.0-1`): Stable releases
+- Version-specific tags (e.g., `0.31.0-1__0.1`): Stable releases
 
 ### Build Process
 
