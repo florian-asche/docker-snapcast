@@ -36,7 +36,7 @@ jobs:
           UPSTREAM_TAG="${SNAPCAST_FULL_VERSION%-*}"
           SNAPCAST_VERSION1="${UPSTREAM_TAG#v}"
           SNAPCAST_VERSION2="${SNAPCAST_FULL_VERSION#v}"
-          for VAR in SNAPCAST_FULL_VERSION SNAPCAST_VERSION1 SNAPCAST_VERSION2; do
+          for VAR in SNAPCAST_FULL_VERSION UPSTREAM_TAG SNAPCAST_VERSION1 SNAPCAST_VERSION2; do
             echo "${VAR}=${!VAR}" >> $GITHUB_OUTPUT
           done
 
@@ -70,7 +70,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            DEBIAN_VERSION=bookworm
             SNAPCAST_VERSION1=${{ steps.compute_args.outputs.SNAPCAST_VERSION1 }}
             SNAPCAST_VERSION2=${{ steps.compute_args.outputs.SNAPCAST_VERSION2 }}
       - name: Generate artifact attestation
