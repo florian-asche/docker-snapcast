@@ -5,9 +5,11 @@ This repository provides Docker images for [Snapcast](https://github.com/badaix/
 ## Features
 
 - Pre-built Docker images for both Snapcast server and client
-- Uses Pipewire-client for audio server connectivity (If you need a Pi-Ready Image, you can find it here: https://github.com/florian-asche/PiCompose)
-- Supports multiple architectures
+- Uses Pipewire-client for audio server connectivity
+- Supports multiple architectures (linux/amd64 and linux/aarch64)
 - Automated builds with artifact attestation for security
+
+For Raspberry Pi users: Check out [PiCompose](https://github.com/florian-asche/PiCompose) for Pi-ready image with pipewire-server.
 
 ## Usage
 
@@ -45,13 +47,9 @@ The Docker images are built using GitHub Actions, which provides:
 ### Build Process
 
 The build process includes:
-- Multi-architecture support
+- Multi-architecture support (linux/amd64 and linux/aarch64)
 - Security verification through artifact attestation
 - Automated testing and validation
 - Regular updates to maintain compatibility
 
 For more information about the build process and available architectures, please refer to the Actions tab in this repository.
-
-#### Architecture
-
-The Image is build for linux/amd64 and linux/aarch64
