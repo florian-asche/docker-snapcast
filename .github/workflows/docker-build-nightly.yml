@@ -1,5 +1,5 @@
 ---
-name: Build and publish the nightly snapcast docker image
+name: Build and publish the snapcast docker image
 
 on:
   push:
@@ -78,4 +78,3 @@ jobs:
           subject-name: ${{ env.REGISTRY }}/${{ github.repository }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
-...
