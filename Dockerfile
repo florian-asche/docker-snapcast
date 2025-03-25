@@ -21,7 +21,8 @@ RUN apt-get update && \
         pipewire-bin \
         build-essential \
         libasound2-plugins \
-        pipewire-alsa && \
+        pipewire-alsa \
+        ca-certificates && \
     rm -rf /var/lib/apt/lists/*
 
 # Install snapcast
