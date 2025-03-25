@@ -29,6 +29,7 @@ RUN curl -vfL -o /tmp/snapserver.deb https://github.com/badaix/snapcast/releases
     curl -vfL -o /tmp/snapclient.deb https://github.com/badaix/snapcast/releases/download/v${SNAPCAST_VERSION1}/snapclient_${SNAPCAST_VERSION2}_$(dpkg --print-architecture)_${DEBIAN_VERSION}.deb && \
     apt install -y /tmp/snapserver.deb /tmp/snapclient.deb && \
     rm -f /tmp/snapserver.deb /tmp/snapclient.deb && \
+    rm -rf /var/lib/apt/lists/* && \
     apt-get clean all
 
 # Create and switch to non-root user
