@@ -1,5 +1,7 @@
 # docker-snapcast
 
+[![CI](https://github.com/florian-asche/docker-snapcast/actions/workflows/docker-build-release.yml/badge.svg)](https://github.com/florian-asche/docker-snapcast/actions/workflows/docker-build-release.yml) [![GitHub Package Version](https://img.shields.io/github/v/tag/florian-asche/docker-snapcast?label=version)](https://github.com/florian-asche/docker-snapcast/pkgs/container/docker-snapcast) [![GitHub License](https://img.shields.io/github/license/florian-asche/docker-snapcast)](https://github.com/florian-asche/docker-snapcast/blob/main/LICENSE) [![GitHub last commit](https://img.shields.io/github/last-commit/florian-asche/docker-snapcast)](https://github.com/florian-asche/docker-snapcast/commits) [![GitHub Container Registry](https://img.shields.io/badge/Container%20Registry-GHCR-blue)](https://github.com/florian-asche/docker-snapcast/pkgs/container/docker-snapcast)
+
 This repository provides Docker images for [Snapcast](https://github.com/badaix/snapcast), a multi-room audio streaming solution. The images include both the Snapcast server and client components, allowing you to set up a synchronized audio streaming system across multiple devices.
 
 ## Features
