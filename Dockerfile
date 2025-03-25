@@ -22,15 +22,14 @@ RUN apt-get update && \
         build-essential \
         libasound2-plugins \
         pipewire-alsa \
-        ca-certificates && \
-    rm -rf /var/lib/apt/lists/*
+        ca-certificates
 
 # Install snapcast
 RUN curl -vfL -o /tmp/snapserver.deb https://github.com/badaix/snapcast/releases/download/v${SNAPCAST_VERSION1}/snapserver_${SNAPCAST_VERSION2}_$(dpkg --print-architecture)_${DEBIAN_VERSION}.deb && \
     curl -vfL -o /tmp/snapclient.deb https://github.com/badaix/snapcast/releases/download/v${SNAPCAST_VERSION1}/snapclient_${SNAPCAST_VERSION2}_$(dpkg --print-architecture)_${DEBIAN_VERSION}.deb && \
     apt install -y /tmp/snapserver.deb /tmp/snapclient.deb && \
     rm -f /tmp/snapserver.deb /tmp/snapclient.deb && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get clean all
 
 # Create and switch to non-root user
 RUN useradd -m -s /bin/bash -u 1000 snapcast && \
