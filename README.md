@@ -11,7 +11,7 @@ This repository provides Docker images for [Snapcast](https://github.com/badaix/
 - Supports multiple architectures (linux/amd64 and linux/aarch64)
 - Automated builds with artifact attestation for security
 
-For Raspberry Pi users: Check out [PiCompose](https://github.com/florian-asche/PiCompose) for Pi-ready image with pipewire-server.
+For Raspberry Pi users: Check out [PiCompose](https://github.com/florian-asche/PiCompose) for a Pi-Ready image with pipewire-server (audio-server).
 
 ## Usage
 
