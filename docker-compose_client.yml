@@ -20,7 +20,7 @@ services:
       - "<place_snapcast_server_here>"
       - "--hostID"
       - "<place_example_snapcast_client_here>"
-      - "--soundcard"
+      - "--Soundcard"
       - "pipewire"
     devices:
       - /dev/snd:/dev/snd

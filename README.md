@@ -59,7 +59,7 @@ docker run --rm -it \
   ghcr.io/florian-asche/docker-snapcast:latest \
   --host <place_snapcast_server_here> \
   --hostID <place_example_snapcast_client_here> \
-  --soundcard pipewire
+  --Soundcard pipewire
 ```
 
 ### Parameter Overview
@@ -77,7 +77,7 @@ docker run --rm -it \
 | `--volume /run/user/1000/pipewire-0:/run/pipewire-0` | Mounts the Pipewire socket for audio streaming                       |
 | `--host <IP>`                                        | IP address of the Snapcast server (or the MusicAssistant Server)     |
 | `--hostID <name>`                                    | Unique identifier for this client                                    |
-| `--soundcard pipewire`                               | Uses Pipewire as the audio backend                                   |
+| `--Soundcard pipewire`                               | Uses Pipewire as the audio backend                                   |
 
 If you need more information about pipewire, you can find them here: [piCompose - Pipewire debugging](https://github.com/florian-asche/PiCompose/docs/pipewire_debugging.md)
 
