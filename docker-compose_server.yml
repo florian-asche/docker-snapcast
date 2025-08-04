@@ -1,8 +1,4 @@
 ---
-# This compose file is for the central server but you can also or better use the music-assistant from nabucasa
-networks:
-  default:                # default network for this project
-
 
 services:
   snapcast:

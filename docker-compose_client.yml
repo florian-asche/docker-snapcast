@@ -1,12 +1,9 @@
 ---
-# This compose file is for the ReSpeaker 2-Mics HAT
-networks:
-  default:                # default network for this project
-
 
 services:
   snapcast:
     # snapcast client for audio playback
+    # note that CLIENT_NAME in command is only working when the variable is passed from the .env file not from env_file. And the hostname is set in the picompose shell script.
     container_name: snapcast
     image: "ghcr.io/florian-asche/docker-snapcast:latest"
     restart: unless-stopped
@@ -16,14 +13,14 @@ services:
       - START_SNAPCLIENT=true
       - PIPEWIRE_RUNTIME_DIR=/run
       - XDG_RUNTIME_DIR=/run
+    #env_file: .env
     command:
       #- "--list" # List devices
       - "--host"
-      - "192.168.33.5"
+      - "<place_snapcast_server_here>"
       - "--hostID"
-      - "wohnzimmer"
+      - "<place_example_snapcast_client_here>"
       - "--soundcard"
-      #- "hw:CARD=seeed2micvoicec,DEV=0"
       - "pipewire"
     devices:
       - /dev/snd:/dev/snd

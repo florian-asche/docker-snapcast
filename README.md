@@ -15,6 +15,12 @@ For Raspberry Pi users: Check out [PiCompose](https://github.com/florian-asche/P
 
 ## Usage
 
+### Available Docker Tags
+
+- `latest`: Latest stable release
+- `nightly`: Builds from the main branch (may be unstable)
+- Version-specific tags (e.g., `0.31.0-1__0.1`): Stable releases
+
 ### Snapcast Server
 
 **Home Assistant Integration**
@@ -22,6 +28,10 @@ For Raspberry Pi users: Check out [PiCompose](https://github.com/florian-asche/P
 If you're using [Home Assistant](https://www.home-assistant.io/) from [Nabu Casa](https://www.nabucasa.com/), we recommend using [Music Assistant](https://github.com/music-assistant/server) as a server in combination with snapcast client instead. It provides better integration and more features for audio streaming management in Home Assistant. An example configuration for the Snapcast server can be found in the `docker-compose_server.yml` file in this repository.
 
 **How to run**
+
+If you still want to run the snapcast server...
+
+For a complete example configuration, check out the `docker-compose_server.yml` file in this repository.
 
 To run the Snapcast server:
 
@@ -47,26 +57,29 @@ docker run --rm -it \
   --volume /run/user/1000/pipewire-0:/run/pipewire-0 \
   --entrypoint=/usr/bin/snapclient \
   ghcr.io/florian-asche/docker-snapcast:latest \
-  --host 192.168.33.5 \
-  --hostID client1 \
+  --host <place_snapcast_server_here> \
+  --hostID <place_example_snapcast_client_here> \
   --soundcard pipewire
 ```
 
 ### Parameter Overview
 
-| Parameter | Description |
-|-----------|-------------|
-| `--network host` | Uses the host's network stack for better audio streaming performance |
-| `--device /dev/snd:/dev/snd` | Gives access to the host's sound devices |
-| `--device /dev/bus/usb` | Enables access to USB audio devices |
-| `--group-add audio` | Adds the container to the host's audio group for sound device access |
-| `-e START_SNAPCLIENT=true` | Ensures the Snapcast client starts automatically |
-| `-e PIPEWIRE_RUNTIME_DIR=/run` | Sets the Pipewire runtime directory |
-| `-e XDG_RUNTIME_DIR=/run` | Sets the XDG runtime directory for Pipewire |
-| `--volume /run/user/1000/pipewire-0:/run/pipewire-0` | Mounts the Pipewire socket for audio streaming |
-| `--host <IP>` | IP address of the Snapcast server |
-| `--hostID <name>` | Unique identifier for this client |
-| `--soundcard pipewire` | Uses Pipewire as the audio backend |
+
+| Parameter                                            | Description                                                          |
+| ------------------------------------------------------ | ---------------------------------------------------------------------- |
+| `--network host`                                     | Uses the host's network stack for better audio streaming performance |
+| `--device /dev/snd:/dev/snd`                         | Gives access to the host's sound devices                             |
+| `--device /dev/bus/usb`                              | Enables access to USB audio devices                                  |
+| `--group-add audio`                                  | Adds the container to the host's audio group for sound device access |
+| `-e START_SNAPCLIENT=true`                           | Ensures the Snapcast client starts automatically                     |
+| `-e PIPEWIRE_RUNTIME_DIR=/run`                       | Sets the Pipewire runtime directory                                  |
+| `-e XDG_RUNTIME_DIR=/run`                            | Sets the XDG runtime directory for Pipewire                          |
+| `--volume /run/user/1000/pipewire-0:/run/pipewire-0` | Mounts the Pipewire socket for audio streaming                       |
+| `--host <IP>`                                        | IP address of the Snapcast server (or the MusicAssistant Server)     |
+| `--hostID <name>`                                    | Unique identifier for this client                                    |
+| `--soundcard pipewire`                               | Uses Pipewire as the audio backend                                   |
+
+If you need more information about pipewire, you can find them here: [piCompose - Pipewire debugging](https://github.com/florian-asche/PiCompose/docs/pipewire_debugging.md)
 
 ## Build Information
 
@@ -77,12 +90,6 @@ The Docker images are built using GitHub Actions, which provides:
 - Automated builds for different architectures
 - Artifact attestation for build provenance verification
 - Regular updates and maintenance
-
-### Available Tags
-
-- `latest`: Latest stable release
-- `nightly`: Builds from the main branch (may be unstable)
-- Version-specific tags (e.g., `0.31.0-1__0.1`): Stable releases
 
 ### Build Process
 
