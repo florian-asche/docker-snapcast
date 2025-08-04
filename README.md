@@ -57,12 +57,15 @@ docker run --rm -it \
   --volume /run/user/1000/pipewire-0:/run/pipewire-0 \
   --entrypoint=/usr/bin/snapclient \
   ghcr.io/florian-asche/docker-snapcast:latest \
-  --host <place_snapcast_server_here> \
   --hostID <place_example_snapcast_client_here> \
-  --Soundcard pipewire
+  --Soundcard pipewire \
+  <tcp|ws|wss>://<snapserver host or IP>[:port]
 ```
 
 ### Parameter Overview
+
+Usage: snapclient [options...] [url]
+With 'url' = <tcp|ws|wss>://<snapserver host or IP>[:port]
 
 
 | Parameter                                            | Description                                                          |
@@ -75,9 +78,10 @@ docker run --rm -it \
 | `-e PIPEWIRE_RUNTIME_DIR=/run`                       | Sets the Pipewire runtime directory                                  |
 | `-e XDG_RUNTIME_DIR=/run`                            | Sets the XDG runtime directory for Pipewire                          |
 | `--volume /run/user/1000/pipewire-0:/run/pipewire-0` | Mounts the Pipewire socket for audio streaming                       |
-| `--host <IP>`                                        | IP address of the Snapcast server (or the MusicAssistant Server)     |
+| `--entrypoint=/usr/bin/snapclient`                   | Set the binary that should be started with the corresponding params  |
 | `--hostID <name>`                                    | Unique identifier for this client                                    |
 | `--Soundcard pipewire`                               | Uses Pipewire as the audio backend                                   |
+| `<tcp|ws|wss>://<snapserver host or IP>[:port]`      | IP address of the Snapcast server (or the MusicAssistant Server)     |
 
 If you need more information about pipewire, you can find them here: [piCompose - Pipewire debugging](https://github.com/florian-asche/PiCompose/docs/pipewire_debugging.md)
 

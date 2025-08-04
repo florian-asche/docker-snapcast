@@ -16,12 +16,11 @@ services:
     #env_file: .env
     command:
       #- "--list" # List devices
-      - "--host"
-      - "<place_snapcast_server_here>"
       - "--hostID"
       - "<place_example_snapcast_client_here>"
       - "--Soundcard"
       - "pipewire"
+      - "<tcp|ws|wss>://<snapserver host or IP>[:port]"
     devices:
       - /dev/snd:/dev/snd
       - /dev/bus/usb
