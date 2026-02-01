@@ -3,6 +3,15 @@ ARG DEBIAN_VERSION=bookworm
 #ARG SNAPCAST_VERSION1=0.31.0
 #ARG SNAPCAST_VERSION2=0.31.0-1
 
+LABEL \
+    org.opencontainers.image.authors="Florian Asche" \
+    org.opencontainers.image.description="Snapcast client and server" \
+    org.opencontainers.image.documentation="https://github.com/florian-asche/docker-snapcast/blob/main/README.md" \
+    org.opencontainers.image.licenses="GNU General Public License v3.0" \
+    org.opencontainers.image.source="https://github.com/florian-asche/docker-snapcast" \
+    org.opencontainers.image.title="Snapcast" \
+    org.opencontainers.image.url="https://github.com/florian-asche/docker-snapcast"
+
 FROM debian:${DEBIAN_VERSION}
 ARG DEBIAN_VERSION
 ARG SNAPCAST_VERSION1
