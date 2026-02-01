@@ -3,6 +3,14 @@ ARG DEBIAN_VERSION=bookworm
 #ARG SNAPCAST_VERSION1=0.31.0
 #ARG SNAPCAST_VERSION2=0.31.0-1
 
+FROM debian:${DEBIAN_VERSION}
+ARG DEBIAN_VERSION
+ARG SNAPCAST_VERSION1
+ARG SNAPCAST_VERSION2
+
+ENV LANG C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive
+
 LABEL \
     org.opencontainers.image.authors="Florian Asche" \
     org.opencontainers.image.description="Snapcast client and server" \
@@ -11,14 +19,6 @@ LABEL \
     org.opencontainers.image.source="https://github.com/florian-asche/docker-snapcast" \
     org.opencontainers.image.title="Snapcast" \
     org.opencontainers.image.url="https://github.com/florian-asche/docker-snapcast"
-
-FROM debian:${DEBIAN_VERSION}
-ARG DEBIAN_VERSION
-ARG SNAPCAST_VERSION1
-ARG SNAPCAST_VERSION2
-
-ENV LANG C.UTF-8
-ENV DEBIAN_FRONTEND=noninteractive
 
 # Install audio dependencies
 RUN apt-get update && \
