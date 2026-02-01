@@ -46,10 +46,10 @@ jobs:
           done
 
       - name: Check version
-        run: echo "The version is SNAPCAST_VERSION1=$SNAPCAST_VERSION1"
+        run: echo "The version is SNAPCAST_VERSION1=${{ steps.compute_args.outputs.SNAPCAST_VERSION1 }}"
 
       - name: Check version
-        run: echo "The version is SNAPCAST_VERSION2=$SNAPCAST_VERSION2"
+        run: echo "The version is SNAPCAST_VERSION2=${{ steps.compute_args.outputs.SNAPCAST_VERSION2 }}"
 
       - name: Log in to the Container registry
         uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20 # v3.1.0
