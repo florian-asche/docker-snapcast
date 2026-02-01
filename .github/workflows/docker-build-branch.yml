@@ -45,6 +45,12 @@ jobs:
             echo "${VAR}=${!VAR}" >> $GITHUB_OUTPUT
           done
 
+      - name: Check version
+        run: echo "The version is SNAPCAST_VERSION1=${{ steps.compute_args.outputs.SNAPCAST_VERSION1 }}"
+
+      - name: Check version
+        run: echo "The version is SNAPCAST_VERSION2=${{ steps.compute_args.outputs.SNAPCAST_VERSION2 }}"
+
       - name: Log in to the Container registry
         uses: docker/login-action@e92390c5fb421da1463c202d546fed0ec5c39f20 # v3.1.0
         with:
@@ -72,13 +78,12 @@ jobs:
           context: .
           platforms: linux/amd64,linux/aarch64
           push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ github.repository }}:${{ env.CLEAN_BRANCH_NAME }}
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{ env.CLEAN_BRANCH_NAME }}
           labels: |
             branch=${{ env.CLEAN_BRANCH_NAME }}
-            build-args: |
-              SNAPCAST_VERSION1=${{ steps.compute_args.outputs.SNAPCAST_VERSION1 }}
-              SNAPCAST_VERSION2=${{ steps.compute_args.outputs.SNAPCAST_VERSION2 }}
+          build-args: |
+            SNAPCAST_VERSION1=${{ steps.compute_args.outputs.SNAPCAST_VERSION1 }}
+            SNAPCAST_VERSION2=${{ steps.compute_args.outputs.SNAPCAST_VERSION2 }}
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
         with:
