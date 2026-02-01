@@ -20,6 +20,10 @@ LABEL \
     org.opencontainers.image.title="Snapcast" \
     org.opencontainers.image.url="https://github.com/florian-asche/docker-snapcast"
 
+# fail early
+RUN : "${SNAPCAST_VERSION1:?SNAPCAST_VERSION1 is required}" \
+    && : "${SNAPCAST_VERSION2:?SNAPCAST_VERSION2 is required}"
+
 # Install audio dependencies
 RUN apt-get update && \
     apt-get install --yes --no-install-recommends \
