@@ -78,13 +78,12 @@ jobs:
           context: .
           platforms: linux/amd64,linux/aarch64
           push: true
-          tags: |
-            ${{ env.REGISTRY }}/${{ github.repository }}:${{ env.CLEAN_BRANCH_NAME }}
+          tags: ${{ env.REGISTRY }}/${{ github.repository }}:${{ env.CLEAN_BRANCH_NAME }}
           labels: |
             branch=${{ env.CLEAN_BRANCH_NAME }}
-            build-args: |
-              SNAPCAST_VERSION1=${{ steps.compute_args.outputs.SNAPCAST_VERSION1 }}
-              SNAPCAST_VERSION2=${{ steps.compute_args.outputs.SNAPCAST_VERSION2 }}
+          build-args: |
+            SNAPCAST_VERSION1="${{ steps.compute_args.outputs.SNAPCAST_VERSION1 }}"
+            SNAPCAST_VERSION2="${{ steps.compute_args.outputs.SNAPCAST_VERSION2 }}"
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v1
         with:
