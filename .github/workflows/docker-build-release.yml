@@ -1,5 +1,5 @@
 ---
-name: Build and publish the snapcast docker image
+name: Build release
 
 on:
   push:
