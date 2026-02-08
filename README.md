@@ -29,59 +29,46 @@ If you're using [Home Assistant](https://www.home-assistant.io/) from [Nabu Casa
 
 **How to run**
 
-If you still want to run the snapcast server...
-
-For a complete example configuration, check out the `docker-compose_server.yml` file in this repository.
-
-To run the Snapcast server:
+If you still want to run the snapcast server, check out the `docker-compose_server.yml` file:
 
 ```bash
-docker run --rm -it ghcr.io/florian-asche/docker-snapcast:latest
+docker compose -f docker-compose_server.yml up -d
 ```
 
 ### Snapcast Client
 
 For a complete example configuration, check out the `docker-compose_client.yml` file in this repository.
 
-To run the Snapcast client, specify the host ID and use the snapclient entrypoint:
+To run the Snapcast client, copy `.env.example` to `.env` and configure your settings:
 
 ```bash
-docker run --rm -it \
-  --network host \
-  --device /dev/snd:/dev/snd \
-  --device /dev/bus/usb \
-  --group-add audio \
-  -e START_SNAPCLIENT=true \
-  -e PIPEWIRE_RUNTIME_DIR=/run \
-  -e XDG_RUNTIME_DIR=/run \
-  --volume /run/user/1000/pipewire-0:/run/pipewire-0 \
-  --entrypoint=/usr/bin/snapclient \
-  ghcr.io/florian-asche/docker-snapcast:latest \
-  --hostID <place_example_snapcast_client_here> \
-  --Soundcard pipewire \
-  <tcp|ws|wss>://<snapserver host or IP>[:port]
+cp .env.example .env
+# Edit .env with your configuration
+docker compose -f docker-compose_client.yml up -d
 ```
 
-### Parameter Overview
+### Configuration Parameters
 
-Usage: snapclient [options...] [url]
-With 'url' = <tcp|ws|wss>://<snapserver host or IP>[:port]
+The client uses environment variables for configuration. Copy `.env.example` to `.env` and customize:
 
+| Parameter               | Description                                                          |
+| ------------------------ | ---------------------------------------------------------------------- |
+| `SC_USER_ID`            | User ID for audio device permissions (default: 1000)                 |
+| `SC_USER_GROUP`         | User group ID for audio device permissions (default: 1000)            |
+| `CLIENT_NAME`           | Optional custom name for this client                                 |
+| `SC_PULSE_SERVER`       | PulseAudio/Pipewire socket path (default: unix:/run/user/1000/pulse/native) |
+| `SC_XDG_RUNTIME_DIR`    | XDG runtime directory (default: /run/user/1000)                       |
+| `SNAPCAST_REMOTE_HOST`  | Snapcast server URL (e.g., tcp://192.168.33.5)                        |
+| `ENABLE_DEBUG`          | Enable debug mode (optional, set to "1" to enable)                   |
 
-| Parameter                                            | Description                                                          |
-| ------------------------------------------------------ | ---------------------------------------------------------------------- |
-| `--network host`                                     | Uses the host's network stack for better audio streaming performance |
-| `--device /dev/snd:/dev/snd`                         | Gives access to the host's sound devices                             |
-| `--device /dev/bus/usb`                              | Enables access to USB audio devices                                  |
-| `--group-add audio`                                  | Adds the container to the host's audio group for sound device access |
-| `-e START_SNAPCLIENT=true`                           | Ensures the Snapcast client starts automatically                     |
-| `-e PIPEWIRE_RUNTIME_DIR=/run`                       | Sets the Pipewire runtime directory                                  |
-| `-e XDG_RUNTIME_DIR=/run`                            | Sets the XDG runtime directory for Pipewire                          |
-| `--volume /run/user/1000/pipewire-0:/run/pipewire-0` | Mounts the Pipewire socket for audio streaming                       |
-| `--entrypoint=/usr/bin/snapclient`                   | Set the binary that should be started with the corresponding params  |
-| `--hostID <name>`                                    | Unique identifier for this client                                    |
-| `--Soundcard pipewire`                               | Uses Pipewire as the audio backend                                   |
-| `<tcp|ws|wss>://<snapserver host or IP>[:port]`      | IP address of the Snapcast server (or the MusicAssistant Server)     |
+### Command Line Parameters
+
+You can also pass parameters directly to snapclient:
+
+```bash
+# List available devices
+--list
+```
 
 If you need more information about pipewire, you can find them here: [piCompose - Pipewire debugging](https://github.com/florian-asche/PiCompose/docs/pipewire_debugging.md)
 
