@@ -40,7 +40,7 @@ if [ "$START_SNAPCLIENT" = "true" ]; then
     EXTRA_ARGS="$EXTRA_ARGS --hostID $CLIENT_NAME"
   fi
 
-  AUDIO_OUTPUT_DEVICE=${AUDIO_OUTPUT_DEVICE:-"default"}
+  AUDIO_OUTPUT_DEVICE=${AUDIO_OUTPUT_DEVICE:-"pulse"}
   if [ -n "${AUDIO_OUTPUT_DEVICE}" ]; then
     EXTRA_ARGS="$EXTRA_ARGS --soundcard $AUDIO_OUTPUT_DEVICE"
   fi
