@@ -34,7 +34,7 @@ if [ "$ENABLE_DEBUG" = "1" ]; then
   EXTRA_ARGS="$EXTRA_ARGS --debug"
 fi
 
-if [ "$START_SNAPSERVER" = "true" ]; then
+if [ "$START_SNAPCLIENT" = "true" ]; then
   CLIENT_NAME=${CLIENT_NAME:-$TEMP_CLIENT_NAME}
   if [ -n "${CLIENT_NAME}" ]; then
     EXTRA_ARGS="$EXTRA_ARGS --hostID $CLIENT_NAME"
