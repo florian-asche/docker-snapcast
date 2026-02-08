@@ -27,13 +27,18 @@ RUN apt-get update && \
     apt-get install --yes --no-install-recommends \
         curl \
         avahi-utils \
-        alsa-utils \
         pulseaudio-utils \
+        alsa-utils \
         pipewire-bin \
+        pipewire-alsa \
+        pipewire-pulse \
         build-essential \
         libasound2-plugins \
         pipewire-alsa \
-        ca-certificates
+        ca-certificates \
+        iproute2 \
+        procps \
+&& apt-get clean
 
 # Install snapcast
 RUN echo https://github.com/badaix/snapcast/releases/download/v${SNAPCAST_VERSION1}/snapserver_${SNAPCAST_VERSION2}_$(dpkg --print-architecture)_${DEBIAN_VERSION}.deb && \
@@ -45,6 +50,12 @@ RUN curl -vfL -o /tmp/snapserver.deb https://github.com/badaix/snapcast/releases
     rm -rf /var/lib/apt/lists/* && \
     apt-get clean all
 
+### Set workdir:
+WORKDIR /app
+
+### Copy all application files:
+COPY docker-entrypoint.sh ./
+
 # Create and switch to non-root user
 RUN useradd -m -s /bin/bash -u 1000 snapcast && \
     usermod -a -G audio snapcast
@@ -53,5 +64,5 @@ USER snapcast
 # Set ports for snapcast
 EXPOSE 1704 1705
 
-# Set start script
-ENTRYPOINT ["/usr/bin/snapserver"]
+### Set start script:
+ENTRYPOINT ["./docker-entrypoint.sh"]
